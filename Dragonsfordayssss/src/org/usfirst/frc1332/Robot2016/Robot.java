@@ -21,16 +21,16 @@ import edu.wpi.first.wpilibj.CameraServer;
  */
 public class Robot extends IterativeRobot {
 	
-	  CameraServer server;
+	  //CameraServer server;
 	  public RunMode run_mode;
 	  
 	  
 
 	    public Robot() {
-	        server = CameraServer.getInstance();
-	        server.setQuality(50);
+	        //server = CameraServer.getInstance();
+	        //server.setQuality(50);
 	        //the camera name (ex "cam0") can be found through the roborio web interface
-	        server.startAutomaticCapture("cam0");
+	        //server.startAutomaticCapture("cam0");
 	    } 
 
     Command autonomousCommand;
