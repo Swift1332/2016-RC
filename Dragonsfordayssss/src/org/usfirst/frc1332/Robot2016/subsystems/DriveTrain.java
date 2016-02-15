@@ -2,11 +2,11 @@
 package org.usfirst.frc1332.Robot2016.subsystems;
 
 import org.usfirst.frc1332.Robot2016.commands.*;
+import org.usfirst.frc1332.Robot2016.DragonDrive;
 import org.usfirst.frc1332.Robot2016.RobotMap;
 import edu.wpi.first.wpilibj.AnalogGyro;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.SpeedController;
-import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.Encoder;
 
 import edu.wpi.first.wpilibj.command.PIDSubsystem;
@@ -21,7 +21,7 @@ public class DriveTrain extends PIDSubsystem  {
     private final SpeedController rearLeft = RobotMap.driveTrainFrontLeft;
     private final SpeedController frontRight = RobotMap.driveTrainFrontRight;
     private final SpeedController rearRight = RobotMap.driveTrainFrontLeft;
-    private final RobotDrive robotDrive4 = RobotMap.driveTrainDrive4;
+    private final DragonDrive robotDrive4 = RobotMap.driveTrainDrive4;
     private final Encoder quad1 = RobotMap.driveTrainQuad1;
     private final Encoder quad2 = RobotMap.driveTrainQuad2;
     private final AnalogGyro gyro = RobotMap.driveTrainAnalogGyro1;
@@ -30,7 +30,7 @@ public class DriveTrain extends PIDSubsystem  {
     // Initialize your subsystem here
     public DriveTrain () {
 
-    	super("PIDSubsystem1", 1.0, 0.0, 0.0);
+    	super("PIDSubsystem1", 0.1, 0.0, 0.0);
         setAbsoluteTolerance(0.2);
         getPIDController().setContinuous(false);
         LiveWindow.addActuator("PID Subsystem 1", "PIDSubsystem Controller", getPIDController());
@@ -46,6 +46,11 @@ public class DriveTrain extends PIDSubsystem  {
     	return gyro.getAngle();
     	
     }
+    
+    public void resetGyro(){
+    	gyro.reset();
+    }
+    
     public void initDefaultCommand() {
     	setDefaultCommand(new ArcadeDrive());
     }
@@ -60,7 +65,7 @@ public class DriveTrain extends PIDSubsystem  {
         // yourPot.getAverageVoltage() / kYourMaxVoltage;
 
     	double value = gyro.pidGet();
-    	System.out.println("Pin: "  + value);
+    	//System.out.println("Pin: "  + value);
         return value;
     }
     
@@ -88,24 +93,19 @@ public class DriveTrain extends PIDSubsystem  {
     protected void usePIDOutput(double output) {
         // Use output to drive your system, like a motor
         // e.g. yourMotor.set(output);
-    	System.out.println("Pout: " + output);
-        
-
-        double setPoint = getPIDController().getSetpoint();
-    	System.out.println("Set: " + setPoint);
+    	//System.out.println("Pout: " + output);
     	
-    	double leftS = setPoint;
-    	double rightS = setPoint;
+    	double leftS = -output;
+    	double rightS =  output;
     	
-    	leftS = leftS + output;
-    	rightS = rightS - output;
-    	
-    	System.out.println("Left: " + leftS);
-    	System.out.println("Right: " + rightS);
-    	frontRight.pidWrite(rightS);
-        rearRight.pidWrite(rightS);
-    	frontLeft.pidWrite(leftS);
-    	rearLeft.pidWrite(leftS);
+    	//System.out.println("Left: " + leftS);
+    	//System.out.println("Right: " + rightS);
+    	//frontRight.pidWrite(rightS);
+        //rearRight.pidWrite(rightS);
+    	//frontLeft.pidWrite(leftS);
+    	//rearLeft.pidWrite(leftS);
+    	robotDrive4.gyroPIDLeftModifier = leftS;
+    	robotDrive4.gyroPIDRightModifier = rightS;
     }
     
     public void TankDrive(Joystick drivePad){

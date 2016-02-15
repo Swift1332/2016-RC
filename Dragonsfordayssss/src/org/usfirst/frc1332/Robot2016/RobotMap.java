@@ -24,7 +24,7 @@ public class RobotMap {
     public static SpeedController driveTrainRearLeft;
     public static SpeedController driveTrainFrontRight;
     public static SpeedController driveTrainRearRight;
-    public static RobotDrive driveTrainDrive4;
+    public static DragonDrive driveTrainDrive4;
     public static AnalogGyro driveTrainAnalogGyro1;
     public static Encoder driveTrainQuad1;
     public static Encoder driveTrainQuad2;
@@ -52,7 +52,7 @@ public class RobotMap {
         driveTrainRearRight = new Talon(3);
         LiveWindow.addActuator("DriveTrain", "RearRight", (Talon) driveTrainRearRight);
         
-        driveTrainDrive4 = new RobotDrive(driveTrainFrontLeft, driveTrainRearLeft,
+        driveTrainDrive4 = new DragonDrive(driveTrainFrontLeft, driveTrainRearLeft,
                 driveTrainFrontRight, driveTrainRearRight);
         
         driveTrainDrive4.setSafetyEnabled(true);
@@ -60,8 +60,10 @@ public class RobotMap {
         driveTrainDrive4.setSensitivity(0.5);
         driveTrainDrive4.setMaxOutput(0.8);
         
-        driveTrainDrive4.setInvertedMotor(RobotDrive.MotorType.kFrontRight, true);
-        driveTrainDrive4.setInvertedMotor(RobotDrive.MotorType.kRearRight, true);
+        driveTrainDrive4.setInvertedMotor(DragonDrive.MotorType.kFrontRight, true);
+        driveTrainDrive4.setInvertedMotor(DragonDrive.MotorType.kRearRight, true);
+        driveTrainDrive4.setInvertedMotor(DragonDrive.MotorType.kFrontLeft, true);
+        driveTrainDrive4.setInvertedMotor(DragonDrive.MotorType.kRearLeft, true);
        
         //Digital IO Connections
         driveTrainQuad1 = new Encoder(5, 6, false, EncodingType.k4X);
