@@ -93,19 +93,9 @@ public class DriveTrain extends PIDSubsystem  {
     protected void usePIDOutput(double output) {
         // Use output to drive your system, like a motor
         // e.g. yourMotor.set(output);
-    	//System.out.println("Pout: " + output);
     	
-    	double leftS = -output;
-    	double rightS =  output;
-    	
-    	//System.out.println("Left: " + leftS);
-    	//System.out.println("Right: " + rightS);
-    	//frontRight.pidWrite(rightS);
-        //rearRight.pidWrite(rightS);
-    	//frontLeft.pidWrite(leftS);
-    	//rearLeft.pidWrite(leftS);
-    	robotDrive4.gyroPIDLeftModifier = leftS;
-    	robotDrive4.gyroPIDRightModifier = rightS;
+    	robotDrive4.gyroPIDLeftModifier = -output;
+    	robotDrive4.gyroPIDRightModifier = output;
     }
     
     public void TankDrive(Joystick drivePad){
