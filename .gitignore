@@ -13,3 +13,7 @@ hs_err_pid*
 
 #tilde files
 *~
+
+# generated for every build
+sysProps.xml
+
