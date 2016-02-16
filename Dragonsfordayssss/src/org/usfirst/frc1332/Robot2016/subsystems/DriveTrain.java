@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.Encoder;
 
 import edu.wpi.first.wpilibj.command.PIDSubsystem;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
@@ -73,6 +74,7 @@ public class DriveTrain extends PIDSubsystem  {
     	
     	double val = quad1.getDistance();
     	System.out.println("Q1Pin: " + val);
+    	SmartDashboard.putNumber("Left Encoder: ", quad1.getRate());
     	return val;
     }
     
@@ -83,6 +85,7 @@ public class DriveTrain extends PIDSubsystem  {
     protected double returnPIDInput2(){
     	double v = quad2.getDistance();
     	System.out.println("Q2Pin:" + v);
+    	SmartDashboard.putNumber("Right Encoder: ", quad2.getRate());
     	return v;
     }
 
@@ -94,7 +97,7 @@ public class DriveTrain extends PIDSubsystem  {
         // Use output to drive your system, like a motor
         // e.g. yourMotor.set(output);
     	
-    	robotDrive4.gyroPIDLeftModifier = -output;
+    	robotDrive4.gyroPIDLeftModifier = -output; //Negative Value on Compass
     	robotDrive4.gyroPIDRightModifier = output;
     }
     

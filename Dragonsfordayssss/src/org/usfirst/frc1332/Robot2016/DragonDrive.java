@@ -31,7 +31,9 @@ public class DragonDrive extends RobotDrive {
 	
 	 public void setLeftRightMotorOutputs(double leftOutput, double rightOutput) {
 		 
-		 if (Math.abs(leftOutput - rightOutput) < 0.1)
+		 if ((Math.abs(leftOutput - rightOutput) < 0.1)) //&& Robot.oi.DeadMan.get()) 
+			 //Tune this option (Start @ 0.4 and work the way back down towards 0.1). Want the stick position to be just 
+			 //a tad off center and not turn but still register a turn when needing too. Also can this turn in an arc?
 		 {
 			 leftOutput = leftOutput + gyroPIDLeftModifier;
 			 rightOutput = rightOutput + gyroPIDRightModifier;
@@ -40,6 +42,12 @@ public class DragonDrive extends RobotDrive {
 		 {
 			 //reset gyro
 			 Robot.driveTrain.resetGyro();
+		 }
+		 
+		 if (!Robot.oi.DeadMan.get()) //This function is a safety measure. This prevents motor output and reset the gyro unless trigger is pressed.
+		 {
+			 Robot.driveTrain.resetGyro();
+			 Robot.driveTrain.drivestop(0);
 		 }
 		 
 		 super.setLeftRightMotorOutputs(leftOutput, rightOutput);	 

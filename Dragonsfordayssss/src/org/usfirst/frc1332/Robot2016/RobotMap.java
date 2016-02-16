@@ -10,7 +10,7 @@ import edu.wpi.first.wpilibj.CounterBase.EncodingType;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.PIDSourceType;
 import edu.wpi.first.wpilibj.RobotDrive;
-
+import edu.wpi.first.wpilibj.SafePWM;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 
 /**
@@ -42,15 +42,19 @@ public class RobotMap {
     	//PWM Connections        
         driveTrainFrontLeft = new Talon(0);
         LiveWindow.addActuator("DriveTrain", "FrontLeft", (Talon) driveTrainFrontLeft);
+        //((SafePWM) driveTrainFrontLeft).setExpiration(0.1);
         
         driveTrainRearLeft = new Talon(1);
         LiveWindow.addActuator("DriveTrain", "RearLeft", (Talon) driveTrainRearLeft);
+        //((SafePWM) driveTrainRearLeft).setExpiration(0.1);
         
         driveTrainFrontRight = new Talon(2);
         LiveWindow.addActuator("DriveTrain", "FrontRight", (Talon) driveTrainFrontRight);
+        //((SafePWM) driveTrainFrontRight).setExpiration(0.1);
       
         driveTrainRearRight = new Talon(3);
         LiveWindow.addActuator("DriveTrain", "RearRight", (Talon) driveTrainRearRight);
+        //((SafePWM) driveTrainRearRight).setExpiration(0.1);
         
         driveTrainDrive4 = new DragonDrive(driveTrainFrontLeft, driveTrainRearLeft,
                 driveTrainFrontRight, driveTrainRearRight);
