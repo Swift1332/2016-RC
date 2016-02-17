@@ -42,20 +42,16 @@ public class RobotMap {
     	//PWM Connections        
         driveTrainFrontLeft = new Talon(0);
         LiveWindow.addActuator("DriveTrain", "FrontLeft", (Talon) driveTrainFrontLeft);
-        //((SafePWM) driveTrainFrontLeft).setExpiration(0.1);
-        
+              
         driveTrainRearLeft = new Talon(1);
         LiveWindow.addActuator("DriveTrain", "RearLeft", (Talon) driveTrainRearLeft);
-        //((SafePWM) driveTrainRearLeft).setExpiration(0.1);
-        
+              
         driveTrainFrontRight = new Talon(2);
         LiveWindow.addActuator("DriveTrain", "FrontRight", (Talon) driveTrainFrontRight);
-        //((SafePWM) driveTrainFrontRight).setExpiration(0.1);
-      
+       
         driveTrainRearRight = new Talon(3);
         LiveWindow.addActuator("DriveTrain", "RearRight", (Talon) driveTrainRearRight);
-        //((SafePWM) driveTrainRearRight).setExpiration(0.1);
-        
+       
         driveTrainDrive4 = new DragonDrive(driveTrainFrontLeft, driveTrainRearLeft,
                 driveTrainFrontRight, driveTrainRearRight);
         

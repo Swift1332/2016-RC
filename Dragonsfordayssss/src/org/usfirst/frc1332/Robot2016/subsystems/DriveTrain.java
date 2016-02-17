@@ -105,7 +105,7 @@ public class DriveTrain extends PIDSubsystem  {
     	robotDrive4.tankDrive(drivePad, 1,drivePad, 5, true);
     }
     
-    public void drivestop (double speed){
+    public void drivestop (){
     	robotDrive4.stopMotor();
     }
     

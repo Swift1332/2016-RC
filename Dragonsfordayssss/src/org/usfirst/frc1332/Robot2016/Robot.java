@@ -56,8 +56,9 @@ public class Robot extends IterativeRobot {
         oi = new OI();
 
         // instantiate the command used for the autonomous period
-
-        autonomousCommand = new AutonomousCommand();
+        //
+        //  
+        //  autonomousCommand = new AutonomousCommand();
 
         run_mode = new RunMode(
         		RobotMap.modeSwitchInputChannel1,
@@ -66,29 +67,7 @@ public class Robot extends IterativeRobot {
         		RobotMap.modeSwitchInputChannel4
         		);
         
-        switch (run_mode.getRunMode()) {
-        
-        case 0: 
-        	// All switches in off position, probably a good 'sleep' or 
-        	// no-op setting
-        	break;
-        case 1:
-        	//call a function, for example:
-        	//autonomous1();
-        	break;
-        case 2: 
-        	//call a function, for example:
-        	//autonomous(2);
-        	break;
-        case 15:
-        	// All switches in on position, maybe good for automated system check
-        	// or some such
-        	break;
-        default: 
-        	// a function to call if the run mode switch setting doesn't correspond to
-        	// any previous cases.  Maybe sound a buzzer or flash a warning light.
-        	break;
-        }        
+    
 
     }
 
@@ -106,6 +85,32 @@ public class Robot extends IterativeRobot {
 
     public void autonomousInit() {
         // schedule the autonomous command (example)
+        switch (run_mode.getRunMode()) {
+        
+        case 0: 
+        	// All switches in off position, probably a good 'sleep' or 
+        	// no-op setting 
+        	autonomousCommand = null;
+        	break;
+        case 1:
+        	//call a function, for example:
+        	//autonomousCommand = new SuperAwesomeCommandGroup1();
+        	break;
+        case 2: 
+        	//call a function, for example:
+        	//autonomousCommand = new SuperAwesomeCommandGroup2();
+        	break;
+        case 15:
+        	// All switches in on position, maybe good for automated system check
+        	// or some such
+        	break;
+        default: 
+        	// a function to call if the run mode switch setting doesn't correspond to
+        	// any previous cases.  Maybe sound a buzzer or flash a warning light.
+        	autonomousCommand = null;
+        	break;
+        }    
+    	
         if (autonomousCommand != null) autonomousCommand.start();
     }
 
