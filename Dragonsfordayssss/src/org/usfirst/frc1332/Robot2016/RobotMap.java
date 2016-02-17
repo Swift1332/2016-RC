@@ -31,7 +31,7 @@ public class RobotMap {
 
     
  // set run mode switch channels (DigitPinOut)
-    public static int modeSwitchInputChannel1 = 1;
+    public static int modeSwitchInputChannel1 = 1 ;
 	public static int modeSwitchInputChannel2 = 2;
 	public static int modeSwitchInputChannel3 = 3;
 	public static int modeSwitchInputChannel4 = 4;
