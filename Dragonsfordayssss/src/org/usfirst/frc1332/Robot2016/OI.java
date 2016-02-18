@@ -67,15 +67,13 @@ public class OI {
     }
     public Joystick getArcadeStick() {
         return arcadeStick;
-    
 
-		// TODO Auto-generated method stub
     }
 
 
 		// TODO Auto-generated method stub
 		
-	}
+}
 
 
 
