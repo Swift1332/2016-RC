@@ -38,6 +38,7 @@ public class Robot extends IterativeRobot {
     public static OI oi;
 
     public static DriveTrain driveTrain;
+    public static Shooter shooter;
 
 
     /**
@@ -48,6 +49,7 @@ public class Robot extends IterativeRobot {
     RobotMap.init();
 
     driveTrain = new DriveTrain();
+    shooter = new Shooter();
 
         // OI must be constructed after subsystems. If the OI creates Commands
         //(which it very likely will), subsystems are not guaranteed to be

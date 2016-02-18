@@ -14,6 +14,7 @@ package org.usfirst.frc1332.Robot2016;
 import org.usfirst.frc1332.Robot2016.commands.*;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 //import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
@@ -24,11 +25,13 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
  */
 public class OI {
     public Joystick drivePad;
+    public JoystickButton ballPickupB1;//Pick up ball using button 1
+    public JoystickButton shootBallB2;
     //public JoystickButton buttonName;
     public Joystick opPad;
     public Joystick arcadeStick;
     public JoystickButton DeadMan;
-
+  
 
     public OI() {
 
@@ -39,10 +42,20 @@ public class OI {
         arcadeStick = new Joystick(2);
         DeadMan = new JoystickButton(arcadeStick, 1);//double check mapping
         
+        ballPickupB1 = new JoystickButton (opPad, 1);
+        ballPickupB1.whenPressed(new ballPickup());
+        shootBallB2 = new JoystickButton (opPad, 2);
+        shootBallB2.whenPressed(new shootBall());
+        
+        
 
         // SmartDashboard Buttons
         SmartDashboard.putData("Autonomous Command", new AutonomousCommand());
         SmartDashboard.putData("Turn Robot ", new TurnRobot());
+        SmartDashboard.putData("ArcadeDrive", new ArcadeDrive());
+        SmartDashboard.putData("ballPickup", new ballPickup());
+        SmartDashboard.putData("shootBallB2",new shootBall());
+        
 
     }
 
@@ -50,11 +63,19 @@ public class OI {
         return drivePad;
     }
     public Joystick getOpPad() {
-        return drivePad;
+        return opPad;
     }
     public Joystick getArcadeStick() {
-        return drivePad;
+        return arcadeStick;
+    
+
+		// TODO Auto-generated method stub
     }
 
-}
+
+		// TODO Auto-generated method stub
+		
+	}
+
+
 

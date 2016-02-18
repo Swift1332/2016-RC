@@ -6,7 +6,9 @@ package org.usfirst.frc1332.Robot2016;
 import edu.wpi.first.wpilibj.AnalogGyro;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.Talon;
+import edu.wpi.first.wpilibj.Victor;
 import edu.wpi.first.wpilibj.CounterBase.EncodingType;
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.PIDSourceType;
 import edu.wpi.first.wpilibj.RobotDrive;
@@ -20,7 +22,9 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
  * floating around.
  */
 public class RobotMap {
-    public static SpeedController driveTrainFrontLeft;
+    public static RobotDrive shooterRobotDriveVictor;
+	public static DigitalInput shooterlimitswitch1;
+	public static SpeedController driveTrainFrontLeft;
     public static SpeedController driveTrainRearLeft;
     public static SpeedController driveTrainFrontRight;
     public static SpeedController driveTrainRearRight;
@@ -28,13 +32,14 @@ public class RobotMap {
     public static AnalogGyro driveTrainAnalogGyro1;
     public static Encoder driveTrainQuad1;
     public static Encoder driveTrainQuad2;
-
+    public static Victor shootervictor1;
     
  // set run mode switch channels (DigitPinOut)
     public static int modeSwitchInputChannel1 = 1 ;
 	public static int modeSwitchInputChannel2 = 2;
 	public static int modeSwitchInputChannel3 = 3;
 	public static int modeSwitchInputChannel4 = 4;
+
 
 
     public static void init() {
@@ -64,7 +69,14 @@ public class RobotMap {
         driveTrainDrive4.setInvertedMotor(DragonDrive.MotorType.kRearRight, true);
         driveTrainDrive4.setInvertedMotor(DragonDrive.MotorType.kFrontLeft, true);
         driveTrainDrive4.setInvertedMotor(DragonDrive.MotorType.kRearLeft, true);
+
+        shootervictor1 = new Victor (4);
+        LiveWindow.addActuator("Shooter", "victor", (Victor)shootervictor1);
        
+        shootervictor1.setSafetyEnabled(true);
+        shootervictor1.setExpiration(0.1);
+        shootervictor1.set(1.0);
+        
         //Digital IO Connections
         driveTrainQuad1 = new Encoder(5, 6, false, EncodingType.k4X);
         LiveWindow.addSensor("DriveBase", "Quad1", driveTrainQuad1);
