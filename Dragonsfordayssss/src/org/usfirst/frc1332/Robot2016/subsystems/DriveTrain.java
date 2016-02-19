@@ -31,7 +31,7 @@ public class DriveTrain extends PIDSubsystem  {
     // Initialize your subsystem here
     public DriveTrain () {
 
-    	super("PIDSubsystem1", 0.1, 0.0, 0.0);
+    	super("PIDSubsystem1", 0.077, 0, 0.0);
         setAbsoluteTolerance(0.2);
         getPIDController().setContinuous(false);
         LiveWindow.addActuator("PID Subsystem 1", "PIDSubsystem Controller", getPIDController());
