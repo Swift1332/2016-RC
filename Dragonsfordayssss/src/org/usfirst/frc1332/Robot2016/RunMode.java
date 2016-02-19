@@ -6,7 +6,7 @@ public class RunMode {
 	public ModeSwitch switch_two;
 	public ModeSwitch switch_three;
 	public ModeSwitch switch_four;
-	public int run_mode;
+	private int run_mode;
 
 	public RunMode(int switch_one_channel, int switch_two_channel, int switch_three_channel, int switch_four_channel){
 		switch_one = new ModeSwitch(switch_one_channel);
