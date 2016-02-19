@@ -35,10 +35,10 @@ public class RobotMap {
     public static Victor shootervictor1;
     
  // set run mode switch channels (DigitPinOut)
-    public static int modeSwitchInputChannel1 = 1 ;
+    public static int modeSwitchInputChannel1 = 1;
 	public static int modeSwitchInputChannel2 = 2;
 	public static int modeSwitchInputChannel3 = 3;
-	public static int modeSwitchInputChannel4 = 4;
+	public static int modeSwitchInputChannel4 = 0;
 
 
 
@@ -73,17 +73,18 @@ public class RobotMap {
         shootervictor1 = new Victor (4);
         LiveWindow.addActuator("Shooter", "victor", (Victor)shootervictor1);
        
-        shootervictor1.setSafetyEnabled(true);
-        shootervictor1.setExpiration(0.1);
-        shootervictor1.set(1.0);
+        shootervictor1.setSafetyEnabled(false);
+        //shootervictor1.setExpiration(1.0);        
+        
+        shooterlimitswitch1 = new DigitalInput(8);
         
         //Digital IO Connections
-        driveTrainQuad1 = new Encoder(5, 6, false, EncodingType.k4X);
+        driveTrainQuad1 = new Encoder(4, 5, true, EncodingType.k4X);
         LiveWindow.addSensor("DriveBase", "Quad1", driveTrainQuad1);
-        driveTrainQuad1.setDistancePerPulse(1.0);
+        driveTrainQuad1.setDistancePerPulse(.00542299);
         driveTrainQuad1.setPIDSourceType(PIDSourceType.kRate);
         
-        driveTrainQuad2 = new Encoder(7, 8, true, EncodingType.k4X);
+        driveTrainQuad2 = new Encoder(6, 7, true, EncodingType.k4X);
         LiveWindow.addSensor("DriveBase", "Quad2", driveTrainQuad2);
         driveTrainQuad2.setDistancePerPulse(1.0);
         driveTrainQuad2.setPIDSourceType(PIDSourceType.kRate);
