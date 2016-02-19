@@ -24,7 +24,7 @@ public class Shooter extends Subsystem {
     }
       
    public void ballPickup(){
-	 RobotMap.shootervictor1.set(.5);
+	 RobotMap.shootervictor1.set(-.5);
 	  
    }
    
@@ -43,7 +43,7 @@ public class Shooter extends Subsystem {
 	}
 		
 	public void shootBall(){
-		RobotMap.shootervictor1.set(-1);
+		RobotMap.shootervictor1.set(1);
 	}
 	
 }
