@@ -43,9 +43,9 @@ public class OI {
         DeadMan = new JoystickButton(arcadeStick, 1);//double check mapping
         
         ballPickupB1 = new JoystickButton (opPad, 1);
-        ballPickupB1.whenPressed(new ballPickup());
+        ballPickupB1.whileHeld(new ballPickup());
         shootBallB2 = new JoystickButton (opPad, 2);
-        shootBallB2.whenPressed(new shootBall());
+        shootBallB2.whileHeld(new shootBall());
         
         
 
