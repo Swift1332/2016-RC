@@ -11,7 +11,7 @@ public class ModeSwitch extends DigitalInput {
 	
 	public String getBit(){
 		//return "1" if input is high, "0" if it is low
-		return Integer.toString(get() ? 1 : 0);
+		return Integer.toString(get() ? 0 : 1);
 	}
 
 }
