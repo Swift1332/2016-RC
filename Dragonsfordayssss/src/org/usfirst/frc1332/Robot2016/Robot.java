@@ -20,17 +20,21 @@ import edu.wpi.first.wpilibj.CameraServer;
  * directory.
  */
 public class Robot extends IterativeRobot {
+	public static Robot robot;
 	
-	  //CameraServer server;
+	  CameraServer server;
 	  public RunMode run_mode;
+	  
+	  
 	  
 	  
 
 	    public Robot() {
-	        //server = CameraServer.getInstance();
-	        //server.setQuality(50);
+	        server = CameraServer.getInstance();
+	        server.setQuality(50);
 	        //the camera name (ex "cam0") can be found through the roborio web interface
-	        //server.startAutomaticCapture("cam0");
+	        server.startAutomaticCapture("cam0");
+	        Robot.robot = this;
 	    } 
 
     Command autonomousCommand;
@@ -62,6 +66,7 @@ public class Robot extends IterativeRobot {
         //  
         //  autonomousCommand = new AutonomousCommand();
 
+
         run_mode = new RunMode(
         		RobotMap.modeSwitchInputChannel1,
         		RobotMap.modeSwitchInputChannel2,
@@ -69,6 +74,7 @@ public class Robot extends IterativeRobot {
         		RobotMap.modeSwitchInputChannel4
         		);
         
+        System.out.println("RUN_MODE: " +  String.valueOf(run_mode.getRunMode()));
     
 
     }
@@ -92,16 +98,23 @@ public class Robot extends IterativeRobot {
         case 0: 
         	// All switches in off position, probably a good 'sleep' or 
         	// no-op setting 
-        	autonomousCommand = null;
+        	autonomousCommand = null;        	
         	break;
         case 1:
         	//call a function, for example:
         	//autonomousCommand = new SuperAwesomeCommandGroup1();
+        	autonomousCommand = new shootBall();
         	break;
         case 2: 
         	//call a function, for example:
         	//autonomousCommand = new SuperAwesomeCommandGroup2();
+        	autonomousCommand = new ballPickup();
         	break;
+        case 3:
+        	// All switches in on position, maybe good for automated system check
+        	// or some such
+        	//autonomousCommand = new commandName;
+        	break;    
         case 15:
         	// All switches in on position, maybe good for automated system check
         	// or some such
@@ -112,7 +125,7 @@ public class Robot extends IterativeRobot {
         	autonomousCommand = null;
         	break;
         }    
-    	
+
         if (autonomousCommand != null) autonomousCommand.start();
     }
 
@@ -128,7 +141,11 @@ public class Robot extends IterativeRobot {
         // teleop starts running. If you want the autonomous to
         // continue until interrupted by another command, remove
         // this line or comment it out.
+
         if (autonomousCommand != null) autonomousCommand.cancel();
+        Robot.driveTrain.resetGyro();
+
+
     }
 
     /**
@@ -136,6 +153,12 @@ public class Robot extends IterativeRobot {
      */
     public void teleopPeriodic() {
         Scheduler.getInstance().run();
+        //System.out.println("QUAD1: " + String.valueOf(RobotMap.driveTrainQuad1.getDistance()));
+        
+    }
+    
+    public void testInit(){
+
     }
 
     /**
@@ -144,4 +167,6 @@ public class Robot extends IterativeRobot {
     public void testPeriodic() {
         LiveWindow.run();
     }
+    
+  
 }
