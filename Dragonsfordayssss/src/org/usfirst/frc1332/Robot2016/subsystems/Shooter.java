@@ -29,7 +29,7 @@ public class Shooter extends Subsystem {
    }
    
 	public void stopMotor() {
-		victor.stopMotor();
+		RobotMap.shootervictor1.stopMotor();
 		// TODO Auto-generated method stub
 	}
 	
