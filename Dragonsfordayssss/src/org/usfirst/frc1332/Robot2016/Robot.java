@@ -113,8 +113,28 @@ public class Robot extends IterativeRobot {
         case 3:
         	// All switches in on position, maybe good for automated system check
         	// or some such
-        	//autonomousCommand = new commandName;
+        	autonomousCommand = new PivotRelative(30);
         	break;    
+        case 4:
+        	// All switches in on position, maybe good for automated system check
+        	// or some such
+        	autonomousCommand = new TurnTurn();
+        	break;   
+        case 5:
+        	// All switches in on position, maybe good for automated system check
+        	// or some such
+        	autonomousCommand = new DriveRelative(5);
+        	break;  
+        case 6:
+        	// All switches in on position, maybe good for automated system check
+        	// or some such
+        	autonomousCommand = new DriveDrive();
+        	break;  
+        case 7:
+        	// All switches in on position, maybe good for automated system check
+        	// or some such
+        	autonomousCommand = new Square();
+        	break; 
         case 15:
         	// All switches in on position, maybe good for automated system check
         	// or some such
