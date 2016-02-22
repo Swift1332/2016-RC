@@ -10,6 +10,7 @@ import edu.wpi.first.wpilibj.Victor;
 import edu.wpi.first.wpilibj.CounterBase.EncodingType;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Encoder;
+import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.PIDSourceType;
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.SafePWM;
@@ -39,6 +40,15 @@ public class RobotMap {
 	public static int modeSwitchInputChannel2 = 2;
 	public static int modeSwitchInputChannel3 = 3;
 	public static int modeSwitchInputChannel4 = 0;
+	
+	public static double teleOpGyroDisableTolerance = 0.2;
+	
+	// DriveTrain PID values
+	public static double driveTrainPID_P = 0.057;
+	public static double driveTrainPID_I = 0.0002;
+	public static double driveTrainPID_D = 0.0;
+	public static double driveTrainPID_F = 0.0;
+	public static double driveTrainPID_Period = PIDController.kDefaultPeriod; //default .05
 
 
 

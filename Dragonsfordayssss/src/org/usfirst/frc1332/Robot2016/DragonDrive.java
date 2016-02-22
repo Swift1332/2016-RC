@@ -37,20 +37,25 @@ public class DragonDrive extends RobotDrive {
 			// 0.1). Want the stick position to be just
 			// a tad off center and not turn but still register a turn when
 			// needing too. Also can this turn in an arc?
-			if (Math.abs(leftOutput - rightOutput) < 0.2)
+			if (Math.abs(leftOutput - rightOutput) < RobotMap.teleOpGyroDisableTolerance)
 			{
 				//System.out.println("GYRO: " + String.valueOf(gyroPIDLeftModifier));
 				leftOutput = leftOutput + gyroPIDLeftModifier;
 				rightOutput = rightOutput + gyroPIDRightModifier;
 			} else {
-				// reset gyro
+				// reset gyro unless we are autonomous
 				//System.out.println("NOGYRO");
-				Robot.driveTrain.resetGyro();
+				if (!Robot.robot.isAutonomous())
+				{
+					Robot.driveTrain.resetGyro();
+				}
+
 			}
 
 			
 			// If the dead man switch is not pressed, set motor outputs to 0 and reset the gyro
-			if (!Robot.oi.DeadMan.get())
+			// unless we are in autonomous mode
+			if (!Robot.oi.DeadMan.get() && !Robot.robot.isAutonomous())
 			{
 				//System.out.println("DEADMAN IS DEAD: " + String.valueOf(Timer.getFPGATimestamp()));
 				Robot.driveTrain.resetGyro();
