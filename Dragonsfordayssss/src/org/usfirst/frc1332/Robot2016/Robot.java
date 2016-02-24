@@ -2,8 +2,10 @@
 package org.usfirst.frc1332.Robot2016;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
+import edu.wpi.first.wpilibj.Servo;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
+import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 
 import org.usfirst.frc1332.Robot2016.RobotMap;
@@ -20,6 +22,8 @@ import edu.wpi.first.wpilibj.CameraServer;
  * directory.
  */
 public class Robot extends IterativeRobot {
+	
+
 	public static Robot robot;
 	
 	  CameraServer server;
@@ -44,6 +48,8 @@ public class Robot extends IterativeRobot {
     public static DriveTrain driveTrain;
     public static Shooter shooter;
 
+    public static CameraGimbal camera_gimbal;
+
 
     /**
      * This function is run when the robot is first started up and should be
@@ -54,6 +60,7 @@ public class Robot extends IterativeRobot {
 
     driveTrain = new DriveTrain();
     shooter = new Shooter();
+    camera_gimbal = new CameraGimbal();
 
         // OI must be constructed after subsystems. If the OI creates Commands
         //(which it very likely will), subsystems are not guaranteed to be
@@ -92,6 +99,16 @@ public class Robot extends IterativeRobot {
     }
 
     public void autonomousInit() {
+    	Robot.driveTrain.getPIDController().setPID(
+    			RobotMap.driveTrainPID_P_Auto,
+    			RobotMap.driveTrainPID_I_Auto,
+    			RobotMap.driveTrainPID_D_Auto
+    	);
+    	
+    	
+    	Robot.driveTrain.getPIDController().setSetpoint(.0);
+        Robot.driveTrain.resetGyro();
+    	
         // schedule the autonomous command (example)
         switch (run_mode.getRunMode()) {
         
@@ -103,12 +120,15 @@ public class Robot extends IterativeRobot {
         case 1:
         	//call a function, for example:
         	//autonomousCommand = new SuperAwesomeCommandGroup1();
-        	autonomousCommand = new shootBall();
+        	//autonomousCommand = new 
+        	//autonomousCommand = new shootBall();
+        	autonomousCommand = new DriveRelative(10); //turn the robot 90 
         	break;
         case 2: 
         	//call a function, for example:
         	//autonomousCommand = new SuperAwesomeCommandGroup2();
         	autonomousCommand = new ballPickup();
+        	
         	break;
         case 3:
         	// All switches in on position, maybe good for automated system check
@@ -135,6 +155,17 @@ public class Robot extends IterativeRobot {
         	// or some such
         	autonomousCommand = new Square();
         	break; 
+        	
+        case 8:
+        	// All switches in on position, maybe good for automated system check
+        	// or some such
+        	autonomousCommand = new DriveAndShoot();
+        	break;
+        case 9:
+        	// All switches in on position, maybe good for automated system check
+        	// or some such
+        	autonomousCommand = new Shoot5();
+        	break;
         case 15:
         	// All switches in on position, maybe good for automated system check
         	// or some such
@@ -161,8 +192,15 @@ public class Robot extends IterativeRobot {
         // teleop starts running. If you want the autonomous to
         // continue until interrupted by another command, remove
         // this line or comment it out.
+    	
+    	Robot.driveTrain.getPIDController().setPID(
+    			RobotMap.driveTrainPID_P_TeleOp,
+    			RobotMap.driveTrainPID_I_TeleOp,
+    			RobotMap.driveTrainPID_D_TeleOp
+    			);
 
         if (autonomousCommand != null) autonomousCommand.cancel();
+        Robot.driveTrain.getPIDController().setSetpoint(.0);
         Robot.driveTrain.resetGyro();
 
 

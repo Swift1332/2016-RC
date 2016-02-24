@@ -17,6 +17,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  *
  */
 public class DriveTrain extends PIDSubsystem  {
+	
 
     private final SpeedController frontLeft = RobotMap.driveTrainFrontLeft;
     private final SpeedController rearLeft = RobotMap.driveTrainFrontLeft;
@@ -32,9 +33,9 @@ public class DriveTrain extends PIDSubsystem  {
     public DriveTrain () {
 
     	super("PIDSubsystem1", 
-    			RobotMap.driveTrainPID_P, 
-    			RobotMap.driveTrainPID_I, 
-    			RobotMap.driveTrainPID_D,
+    			RobotMap.driveTrainPID_P_TeleOp, 
+    			RobotMap.driveTrainPID_I_TeleOp, 
+    			RobotMap.driveTrainPID_D_TeleOp,
     			RobotMap.driveTrainPID_F,
     			RobotMap.driveTrainPID_Period);
         setAbsoluteTolerance(0.2);

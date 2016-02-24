@@ -16,7 +16,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
-//import edu.wpi.first.wpilibj.buttons.JoystickButton;
+
 
 
 /**
@@ -27,10 +27,15 @@ public class OI {
     public Joystick drivePad;
     public JoystickButton ballPickupB1;//Pick up ball using button 1
     public JoystickButton shootBallB2;
+    public JoystickButton moveCameraDownB3;
+    public JoystickButton moveCameraUpB4;
+    public JoystickButton moveCameraLeft;
+    public JoystickButton moveCameraRight;
+    public JoystickButton sensitivity;
     //public JoystickButton buttonName;
     public Joystick opPad;
     public Joystick arcadeStick;
-    public JoystickButton DeadMan;
+   public JoystickButton DeadMan;
   
 
     public OI() {
@@ -40,13 +45,28 @@ public class OI {
         //buttonName.whenPressed(new commandName());
         opPad = new Joystick(1);
         arcadeStick = new Joystick(2);
-        DeadMan = new JoystickButton(arcadeStick, 1);//double check mapping
+     DeadMan = new JoystickButton(arcadeStick, 1);//double check mapping
+     DeadMan.whenPressed(new ResetGyro());
         
         ballPickupB1 = new JoystickButton (opPad, 1);
         ballPickupB1.whileHeld(new ballPickup());
         shootBallB2 = new JoystickButton (opPad, 2);
         shootBallB2.whileHeld(new shootBall());
         
+        moveCameraDownB3 = new JoystickButton(drivePad, 2);
+        moveCameraDownB3.whileHeld(new moveCameraUp());
+        
+        moveCameraUpB4 = new JoystickButton(drivePad, 4);
+        moveCameraUpB4.whileHeld(new moveCameraDown());
+        
+        moveCameraLeft = new JoystickButton(drivePad, 1);
+        moveCameraLeft.whileHeld(new moveCameraLeft());
+        
+        moveCameraRight = new JoystickButton(drivePad, 3);
+        moveCameraRight.whileHeld(new moveCameraRight());
+        
+        sensitivity = new JoystickButton(arcadeStick, 7);
+       
         
 
         // SmartDashboard Buttons

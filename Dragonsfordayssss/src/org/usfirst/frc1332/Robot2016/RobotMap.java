@@ -14,6 +14,7 @@ import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.PIDSourceType;
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.SafePWM;
+import edu.wpi.first.wpilibj.Servo;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 
 /**
@@ -34,26 +35,41 @@ public class RobotMap {
     public static Encoder driveTrainQuad1;
     public static Encoder driveTrainQuad2;
     public static Victor shootervictor1;
+    public static Servo cameraGimbalServo_Y;
+    public static Servo cameraGimbalServo_X;
     
- // set run mode switch channels (DigitPinOut)
-    public static int modeSwitchInputChannel1 = 1;
+    public static int servoXChannel = 7;
+    public static int servoYChannel = 6;
+    
+    public static double servoXDefault = 90.0;
+    public static double servoYDefault = 90.0;
+    
+    
+ // set run mode switch channels (DigitChannelPinOut)
+    public static int modeSwitchInputChannel1 = 3;
 	public static int modeSwitchInputChannel2 = 2;
-	public static int modeSwitchInputChannel3 = 3;
+	public static int modeSwitchInputChannel3 = 1;
 	public static int modeSwitchInputChannel4 = 0;
 	
 	public static double teleOpGyroDisableTolerance = 0.2;
 	
 	// DriveTrain PID values
-	public static double driveTrainPID_P = 0.057;
-	public static double driveTrainPID_I = 0.0002;
-	public static double driveTrainPID_D = 0.0;
 	public static double driveTrainPID_F = 0.0;
 	public static double driveTrainPID_Period = PIDController.kDefaultPeriod; //default .05
+	
+	public static double driveTrainPID_P_TeleOp = 0.057;
+	public static double driveTrainPID_I_TeleOp = 0.0002;
+	public static double driveTrainPID_D_TeleOp = 0.0;
+	
+	public static double driveTrainPID_P_Auto = 0.03;
+	public static double driveTrainPID_I_Auto = 0.0002;
+	public static double driveTrainPID_D_Auto = 0.0;
 
 
 
     public static void init() {
 
+    
     	//PWM Connections        
         driveTrainFrontLeft = new Talon(0);
         LiveWindow.addActuator("DriveTrain", "FrontLeft", (Talon) driveTrainFrontLeft);
@@ -104,5 +120,14 @@ public class RobotMap {
         LiveWindow.addSensor("DriveTrain", "AnalogGyro 1", driveTrainAnalogGyro1);
         driveTrainAnalogGyro1.setSensitivity(0.007);
 
+        cameraGimbalServo_X = new Servo(servoXChannel);
+        cameraGimbalServo_Y = new Servo(servoYChannel);
+        
+        cameraGimbalServo_X.set(servoXDefault);
+        cameraGimbalServo_Y.set(servoYDefault);
+        
+        //LiveWindow.addActuator("Camera","servo" , (Servo)cameraCameraservo1);
+              
+  
     }
 }

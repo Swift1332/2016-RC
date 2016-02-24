@@ -33,6 +33,12 @@ public class DragonDrive extends RobotDrive {
 	 public void setLeftRightMotorOutputs(double leftOutput, double rightOutput) {
 		if (Robot.driveTrain != null && Robot.oi != null) {
 			
+			if (Robot.oi.sensitivity.get())
+			{
+				
+				leftOutput = leftOutput/3;
+				rightOutput = rightOutput/3;
+			}			
 			// Tune this option (Start @ 0.4 and work the way back down towards
 			// 0.1). Want the stick position to be just
 			// a tad off center and not turn but still register a turn when
