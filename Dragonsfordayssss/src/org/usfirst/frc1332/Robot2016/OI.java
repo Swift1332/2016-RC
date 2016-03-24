@@ -36,6 +36,7 @@ public class OI {
     public Joystick opPad;
     public Joystick arcadeStick;
    public JoystickButton DeadMan;
+   public JoystickPOVButton pov;
   
 
     public OI() {
@@ -64,6 +65,11 @@ public class OI {
         
         moveCameraRight = new JoystickButton(drivePad, 3);
         moveCameraRight.whileHeld(new moveCameraRight());
+        
+        pov = new JoystickPOVButton(opPad);
+        pov.whileHeld(new moveCameraPOV());
+        
+        
         
         sensitivity = new JoystickButton(arcadeStick, 7);
        
