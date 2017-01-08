@@ -49,6 +49,8 @@ public class Robot extends IterativeRobot {
     public static Shooter shooter;
 
     public static CameraGimbal camera_gimbal;
+    
+    public static AuxilaryMotor1 auxilary_motor_1;
 
 
     /**
@@ -61,6 +63,7 @@ public class Robot extends IterativeRobot {
     driveTrain = new DriveTrain();
     shooter = new Shooter();
     camera_gimbal = new CameraGimbal();
+    auxilary_motor_1 = new AuxilaryMotor1();
 
         // OI must be constructed after subsystems. If the OI creates Commands
         //(which it very likely will), subsystems are not guaranteed to be
@@ -169,6 +172,7 @@ public class Robot extends IterativeRobot {
         case 15:
         	// All switches in on position, maybe good for automated system check
         	// or some such
+        	autonomousCommand = new DriveRelative(6);
         	break;
         default: 
         	// a function to call if the run mode switch setting doesn't correspond to
@@ -203,6 +207,9 @@ public class Robot extends IterativeRobot {
         Robot.driveTrain.getPIDController().setSetpoint(.0);
         Robot.driveTrain.resetGyro();
 
+        
+        RobotMap.cameraGimbalServo_X.set(RobotMap.servoXDefault);
+        RobotMap.cameraGimbalServo_Y.set(RobotMap.servoYDefault);
 
     }
 

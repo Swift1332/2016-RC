@@ -38,11 +38,14 @@ public class RobotMap {
     public static Servo cameraGimbalServo_Y;
     public static Servo cameraGimbalServo_X;
     
+    public static SpeedController auxMotor1;
+    public static int auxMotorInputChannel = 8;
+    
     public static int servoXChannel = 7;
     public static int servoYChannel = 6;
     
-    public static double servoXDefault = 90.0;
-    public static double servoYDefault = 90.0;
+    public static double servoXDefault = 0.717222222222;
+    public static double servoYDefault = 0.713888888888;
     
     
  // set run mode switch channels (DigitChannelPinOut)
@@ -58,11 +61,11 @@ public class RobotMap {
 	public static double driveTrainPID_Period = PIDController.kDefaultPeriod; //default .05
 	
 	public static double driveTrainPID_P_TeleOp = 0.057;
-	public static double driveTrainPID_I_TeleOp = 0.0002;
+	public static double driveTrainPID_I_TeleOp = 0.000;
 	public static double driveTrainPID_D_TeleOp = 0.0;
 	
 	public static double driveTrainPID_P_Auto = 0.03;
-	public static double driveTrainPID_I_Auto = 0.0002;
+	public static double driveTrainPID_I_Auto = 0.000;
 	public static double driveTrainPID_D_Auto = 0.0;
 
 
@@ -100,6 +103,7 @@ public class RobotMap {
         LiveWindow.addActuator("Shooter", "victor", (Victor)shootervictor1);
        
         shootervictor1.setSafetyEnabled(false);
+        
         //shootervictor1.setExpiration(1.0);        
         
         shooterlimitswitch1 = new DigitalInput(8);
@@ -123,8 +127,9 @@ public class RobotMap {
         cameraGimbalServo_X = new Servo(servoXChannel);
         cameraGimbalServo_Y = new Servo(servoYChannel);
         
-        cameraGimbalServo_X.set(servoXDefault);
-        cameraGimbalServo_Y.set(servoYDefault);
+        auxMotor1 = new Talon(auxMotorInputChannel);
+        auxMotor1.setInverted(false);
+
         
         //LiveWindow.addActuator("Camera","servo" , (Servo)cameraCameraservo1);
               

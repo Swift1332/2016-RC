@@ -1,6 +1,7 @@
 package org.usfirst.frc1332.Robot2016;
 
 import edu.wpi.first.wpilibj.GenericHID;
+import edu.wpi.first.wpilibj.Joystick.AxisType;
 import edu.wpi.first.wpilibj.buttons.Button;
 
 public class JoystickPOVButton extends Button {

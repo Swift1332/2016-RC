@@ -26,24 +26,27 @@ public class DriveRelative extends Command {
     protected void initialize() {    
     	startDistance = RobotMap.driveTrainQuad1.getDistance();
     	target = startDistance + relative_target;
+    	Robot.driveTrain.resetGyro();
+    	System.out.println("GYRO DRIVE REL INIT" + String.valueOf(Robot.driveTrain.getGyroAngle()));
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	double driveMod = relative_target <= 0 ? -1 : 1;
-    	double output = .5 * driveMod;
+    	double output = .75 * driveMod;
     	
     	//while (Math.abs(target) - Math.abs((RobotMap.driveTrainQuad1.getDistance() + relative_target))  > .5)
-    	while (!finished && (RobotMap.driveTrainQuad1.getDistance() < target && driveMod > 0) || (RobotMap.driveTrainQuad1.getDistance() > target && driveMod < 0)) 
+    	//while (!finished && (RobotMap.driveTrainQuad1.getDistance() < target && driveMod > 0) || (RobotMap.driveTrainQuad1.getDistance() > target && driveMod < 0))
+    	double start = Timer.getFPGATimestamp();
+    	
+		while ((Timer.getFPGATimestamp() - start) <= Math.abs(relative_target))
     	{
     		//System.out.println((Math.abs(RobotMap.driveTrainQuad1.getDistance() + relative_target) - target));
-			//System.out.println("TARGET: " + target + "  --  QUAD: " + RobotMap.driveTrainQuad1.getDistance());
     		RobotMap.driveTrainDrive4.setLeftRightMotorOutputs(-output, -output);
     		Timer.delay(.05);
     	}
     	
-    	Timer.delay(.5);
-    	
+	
     	finished = true;
     }
 
@@ -60,7 +63,7 @@ public class DriveRelative extends Command {
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
-    	RobotMap.driveTrainDrive4.setLeftRightMotorOutputs(.0, .0);
+    	end();
     	finished = true;
     }
 }

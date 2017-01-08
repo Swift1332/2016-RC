@@ -1,6 +1,7 @@
 package org.usfirst.frc1332.Robot2016.commands;
 
 import org.usfirst.frc1332.Robot2016.Robot;
+import org.usfirst.frc1332.Robot2016.RobotMap;
 
 import edu.wpi.first.wpilibj.command.Command;
 
@@ -30,21 +31,25 @@ public class moveCameraPOV extends Command {
     		if (pov_direction >= 315 || pov_direction <= 45)
     		{
     			Robot.camera_gimbal.moveCameraDown();
+    			System.out.println("Camera Y: " + String.valueOf(RobotMap.cameraGimbalServo_Y.get()));
     		}
 
     		if (pov_direction >= 45 && pov_direction <= 135)
     		{
     			Robot.camera_gimbal.moveCameraRight();
+    			System.out.println("Camera Y: " + String.valueOf(RobotMap.cameraGimbalServo_X.get()));
     		}
 
     		if (pov_direction >= 135 && pov_direction <= 225)
     		{
     			Robot.camera_gimbal.moveCameraUp();
+    			System.out.println("Camera Y: " + String.valueOf(RobotMap.cameraGimbalServo_Y.get()));
     		}
 
     		if (pov_direction >= 225 && pov_direction <= 315)
     		{
     			Robot.camera_gimbal.moveCameraLeft();
+    			System.out.println("Camera Y: " + String.valueOf(RobotMap.cameraGimbalServo_X.get()));
     		}
     	}
     	finished = true;

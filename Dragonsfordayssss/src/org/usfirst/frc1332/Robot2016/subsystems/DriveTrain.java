@@ -55,6 +55,8 @@ public class DriveTrain extends PIDSubsystem  {
     }
     
     public void resetGyro(){
+    	robotDrive4.gyroPIDLeftModifier = .0;
+    	robotDrive4.gyroPIDRightModifier = .0;
     	gyro.reset();
     }
     

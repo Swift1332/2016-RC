@@ -14,6 +14,7 @@ package org.usfirst.frc1332.Robot2016;
 import org.usfirst.frc1332.Robot2016.commands.*;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.Joystick.AxisType;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
@@ -24,7 +25,7 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
  * interface to the commands and command groups that allow control of the robot.
  */
 public class OI {
-    public Joystick drivePad;
+    //public Joystick drivePad;
     public JoystickButton ballPickupB1;//Pick up ball using button 1
     public JoystickButton shootBallB2;
     public JoystickButton moveCameraDownB3;
@@ -37,34 +38,52 @@ public class OI {
     public Joystick arcadeStick;
    public JoystickButton DeadMan;
    public JoystickPOVButton pov;
+   
+   public JoystickButton aux1Forward;
+   public JoystickButton aux1Reverse;
   
 
     public OI() {
 
-        drivePad = new Joystick(0);
+        //drivePad = new Joystick(0);
         //buttonName = new JoystickButton(drivePad, 6);
         //buttonName.whenPressed(new commandName());
         opPad = new Joystick(1);
         arcadeStick = new Joystick(2);
-     DeadMan = new JoystickButton(arcadeStick, 1);//double check mapping
-     DeadMan.whenPressed(new ResetGyro());
+        DeadMan = new JoystickButton(arcadeStick, 1);//double check mapping
+        DeadMan.whenPressed(new ResetGyro());
         
         ballPickupB1 = new JoystickButton (opPad, 1);
         ballPickupB1.whileHeld(new ballPickup());
         shootBallB2 = new JoystickButton (opPad, 2);
         shootBallB2.whileHeld(new shootBall());
         
-        moveCameraDownB3 = new JoystickButton(drivePad, 2);
-        moveCameraDownB3.whileHeld(new moveCameraUp());
+        aux1Forward = new JoystickButton(opPad, 6);
+        aux1Forward.whileHeld(new AuxilaryMotor1Forward());
         
-        moveCameraUpB4 = new JoystickButton(drivePad, 4);
-        moveCameraUpB4.whileHeld(new moveCameraDown());
+        aux1Reverse = new JoystickButton(opPad, 5);
+        aux1Reverse.whileHeld(new AuxilaryMotor1Reverse());
         
-        moveCameraLeft = new JoystickButton(drivePad, 1);
-        moveCameraLeft.whileHeld(new moveCameraLeft());
+                
+        /*
+        JoystickAxesTrigger aux1Forward2 = new JoystickAxesTrigger(opPad, AxisType.kTwist);
+        aux1Forward2.whileHeld(new AuxilaryMotor1Forward());
         
-        moveCameraRight = new JoystickButton(drivePad, 3);
-        moveCameraRight.whileHeld(new moveCameraRight());
+        JoystickAxesTrigger aux1Reverse2 = new JoystickAxesTrigger(opPad, AxisType.kZ);
+        aux1Reverse2.whileHeld(new AuxilaryMotor1Reverse());
+        */
+        
+        //moveCameraDownB3 = new JoystickButton(drivePad, 2);
+        //moveCameraDownB3.whileHeld(new moveCameraUp());
+        
+        //moveCameraUpB4 = new JoystickButton(drivePad, 4);
+        //moveCameraUpB4.whileHeld(new moveCameraDown());
+        
+        //moveCameraLeft = new JoystickButton(drivePad, 1);
+        //moveCameraLeft.whileHeld(new moveCameraLeft());
+        
+        //moveCameraRight = new JoystickButton(drivePad, 3);
+        //moveCameraRight.whileHeld(new moveCameraRight());
         
         pov = new JoystickPOVButton(opPad);
         pov.whileHeld(new moveCameraPOV());
@@ -86,7 +105,7 @@ public class OI {
     }
 
     public Joystick getDrivePad() {
-        return drivePad;
+        return arcadeStick;
     }
     public Joystick getOpPad() {
         return opPad;
